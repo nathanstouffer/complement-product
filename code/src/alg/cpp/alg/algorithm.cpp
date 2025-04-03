@@ -47,8 +47,7 @@ namespace
         }
         else
         {
-            std::vector<stff::mtx2> result;
-            result.reserve(input.size());
+            std::vector<stff::mtx2> result; result.reserve(input.size());
             for (std::size_t i = 0; i < input.size(); ++i)
             {
                 result.push_back(compute(input, i));
@@ -90,8 +89,7 @@ namespace alg
             else                        // there are no zeros, compute the product and then just divide by the relevant value
             {
                 float product = std::accumulate(input.begin(), input.end(), 1.f, std::multiplies<float>());
-                std::vector<float> result;
-                result.reserve(input.size());
+                std::vector<float> result; result.reserve(input.size());
                 for (std::size_t i = 0; i < input.size(); ++i)
                 {
                     result.push_back(product / input[i]);
@@ -103,7 +101,34 @@ namespace alg
 
     std::vector<stff::mtx2> complement_product(std::vector<stff::mtx2> const& input)
     {
-        return brute_force(input);
+        std::size_t singular_count = std::count_if(input.begin(), input.end(), [](stff::mtx2 const& mtx) { return !mtx.invertible(); });
+        if (singular_count > 0)     // if any matrices are singular, then we brute force
+        {
+            return brute_force(input);
+        }
+        else                        // all matrices are invertible, so we can use a clever trick to keep track of partial products
+        {
+            // set up the L matrix as the identity and the R matrix as the complete product
+            stff::mtx2 L = stff::mtx2();
+            stff::mtx2 R = stff::mtx2();
+            for (stff::mtx2 const& M : input) { R *= M; }
+
+            std::vector<stff::mtx2> result; result.reserve(input.size());
+            for (std::size_t i = 0; i < input.size(); ++i)
+            {
+                // grab a reference to the relevant matrix and compute the inverse
+                stff::mtx2 const& M = input[i];
+                stff::mtx2 inv = M.inverted();
+
+                // compute the complement product
+                result.push_back(L * inv * R);
+
+                // update L and R for the next iteration
+                L *= M;
+                R = inv * R;
+            }
+            return result;
+        }
     }
 
 }
