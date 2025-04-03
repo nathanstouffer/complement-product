@@ -47,7 +47,8 @@ namespace alg
             { { stff::mtx2(5), stff::mtx2(1) }, { stff::mtx2(1), stff::mtx2(5) } },
             { { stff::mtx2(stff::vec4(1, 0, 0, 5)), rot(3) }, { rot(3), stff::mtx2(stff::vec4(1, 0, 0, 5)) } },
             // general test cases
-            { { rot(1), rot(2), rot(3), rot(4) }, { rot(9), rot(8), rot(7), rot(6) }},
+            { { rot(1), rot(2), rot(3), rot(4) }, { rot(9), rot(8), rot(7), rot(6) } },
+            { { rot(1), rot(-2), rot(3), rot(-4) }, { rot(-3), rot(0), rot(-5), rot(2) } },
         };
 
         std::size_t i = 0;
