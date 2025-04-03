@@ -20,6 +20,21 @@ namespace
         }
         return product;
     }
+
+    // an internal function that computes the complement product for a particular index
+    stff::mtx2 compute(std::vector<stff::mtx2> const& input, std::size_t ignore)
+    {
+        stff::mtx2 product = stff::mtx2();
+        for (std::size_t i = 0; i < input.size(); ++i)
+        {
+            if (ignore != i)
+            {
+                product *= input[i];
+            }
+        }
+        return product;
+    }
+
 }
 
 namespace alg
@@ -66,7 +81,24 @@ namespace alg
 
     std::vector<stff::mtx2> complement_product(std::vector<stff::mtx2> const& input)
     {
-        return input;
+        if (input.empty())
+        {
+            return {};
+        }
+        else if (input.size() == 1)
+        {
+            return { stff::mtx2() };
+        }
+        else
+        {
+            std::vector<stff::mtx2> result;
+            result.reserve(input.size());
+            for (std::size_t i = 0; i < input.size(); ++i)
+            {
+                result.push_back(compute(input, i));
+            }
+            return result;
+        }
     }
 
 }
