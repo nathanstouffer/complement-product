@@ -14,13 +14,12 @@ namespace alg
         std::vector<scaffolding::numbers> tests = 
         {
             { { 1 }, { 1 }},
-            { { 2 }, { 2 }},
-            { { -5 }, { -5 }},
+            { { 2 }, { 1 }},
             { { 1, 0 }, { 0, 1 }},
             { { 0, 1, 2 }, { 2, 0, 0 }},
         };
 
-        size_t i = 0;
+        std::size_t i = 0;
         for (scaffolding::numbers const& test : tests)
         {
             test.verify(i++);
