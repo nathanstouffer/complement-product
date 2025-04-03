@@ -33,13 +33,7 @@ namespace alg
         }
         else
         {
-            // check how many zeros are in the input
-            std::size_t zero_count = 0;
-            for (float const number : input)
-            {
-                if (number == 0) { ++zero_count; }
-            }
-
+            std::size_t zero_count = std::count(input.begin(), input.end(), 0.f);
             if (zero_count > 1)         // if there is more than one zero then all products are zero
             {
                 return std::vector<float>(input.size(), 0.f);
