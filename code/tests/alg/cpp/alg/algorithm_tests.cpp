@@ -33,4 +33,29 @@ namespace alg
         }
     }
 
+    inline stff::mtx2 rot(float theta) { return stf::math::rotate<float>(theta); }
+
+    TEST(complement_product, matrices)
+    {
+        std::vector<scaffolding::matrices> tests = 
+        {
+            // test cases where there is just one value => return the identity matrix
+            { { stff::mtx2() }, { stff::mtx2() } },
+            { { stff::mtx2(4) }, { stff::mtx2() } },
+            // test cases with two values should swap positions
+            { { stff::mtx2(1), stff::mtx2() }, { stff::mtx2(), stff::mtx2(1) } },
+            { { stff::mtx2(5), stff::mtx2(1) }, { stff::mtx2(1), stff::mtx2(5) } },
+            { { stff::mtx2(stff::vec4(1, 0, 0, 5)), rot(3) }, { rot(3), stff::mtx2(stff::vec4(1, 0, 0, 5)) } },
+            // general test cases
+            { { rot(1), rot(2), rot(3), rot(4) }, { rot(9), rot(8), rot(7), rot(6) } },
+            { { rot(1), rot(-2), rot(3), rot(-4) }, { rot(-3), rot(0), rot(-5), rot(2) } },
+        };
+
+        std::size_t i = 0;
+        for (scaffolding::matrices const& test : tests)
+        {
+            test.verify(i++);
+        }
+    }
+
 }

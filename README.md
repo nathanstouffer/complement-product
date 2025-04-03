@@ -1,6 +1,6 @@
 # complement-product
 
-This is a little repo that solves a problem at multiple levels
+This is a little repo that solves a fun problem at multiple levels
 
 ## Level 1
 
@@ -16,5 +16,5 @@ Solve [Level 1](#level-1) with an algorithm that runs in $O(n)$ time.
 ## Level 3
 
 This level replaces the array of numbers with an array of matrices (with fixed dimensions $d\ x\ d$).
-For the case where all the matrices in the array are invertible, produce an algorithm that runs in $O(n)$.
+For the case where all the matrices in the array are invertible, produce an algorithm that runs in $O(n)$ time.
 The case where there is at least one non-invertible matrix can be solved by an algorithm that runs in $O(n^2)$ time.
