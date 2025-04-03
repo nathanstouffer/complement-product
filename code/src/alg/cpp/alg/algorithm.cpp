@@ -64,4 +64,9 @@ namespace alg
         }
     }
 
+    std::vector<stff::mtx2> complement_product(std::vector<stff::mtx2> const& input)
+    {
+        return input;
+    }
+
 }
