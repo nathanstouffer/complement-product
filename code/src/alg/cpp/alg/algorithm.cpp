@@ -35,6 +35,28 @@ namespace
         return product;
     }
 
+    std::vector<stff::mtx2> brute_force(std::vector<stff::mtx2> const& input)
+    {
+        if (input.empty())
+        {
+            return {};
+        }
+        else if (input.size() == 1)
+        {
+            return { stff::mtx2() };
+        }
+        else
+        {
+            std::vector<stff::mtx2> result;
+            result.reserve(input.size());
+            for (std::size_t i = 0; i < input.size(); ++i)
+            {
+                result.push_back(compute(input, i));
+            }
+            return result;
+        }
+    }
+
 }
 
 namespace alg
@@ -81,24 +103,7 @@ namespace alg
 
     std::vector<stff::mtx2> complement_product(std::vector<stff::mtx2> const& input)
     {
-        if (input.empty())
-        {
-            return {};
-        }
-        else if (input.size() == 1)
-        {
-            return { stff::mtx2() };
-        }
-        else
-        {
-            std::vector<stff::mtx2> result;
-            result.reserve(input.size());
-            for (std::size_t i = 0; i < input.size(); ++i)
-            {
-                result.push_back(compute(input, i));
-            }
-            return result;
-        }
+        return brute_force(input);
     }
 
 }
