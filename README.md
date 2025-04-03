@@ -1,6 +1,6 @@
 # complement-product
 
-This is a little repo that solves a problem at multiple levels
+This is a little repo that solves a fun problem at multiple levels
 
 ## Level 1
 
